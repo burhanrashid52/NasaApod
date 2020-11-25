@@ -27,12 +27,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    testOptions {
+        animationsDisabled true
+
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
     }
 }
 
@@ -62,8 +73,10 @@ dependencies {
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.atsl.runner
     androidTestImplementation deps.atsl.rules
+    androidTestImplementation deps.atsl.core
     androidTestImplementation deps.arch_core.testing
 
     testImplementation deps.junit
+    testImplementation 'org.robolectric:robolectric:4.4'
     debugImplementation deps.fragment.testing
 }
