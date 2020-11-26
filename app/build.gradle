@@ -82,4 +82,6 @@ dependencies {
     testImplementation deps.robolectric
     debugImplementation deps.fragment.testing
     testImplementation deps.mockito.kotlin
+    testImplementation deps.arch_core.testing
+
 }

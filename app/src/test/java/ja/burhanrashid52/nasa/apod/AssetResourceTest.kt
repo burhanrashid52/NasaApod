@@ -38,8 +38,7 @@ class AssetResourceTest {
     fun read_Json_From_AssetResource_Successfully() {
         val loadJson = assetResource.loadJson("data.json")
         assertNotNull(loadJson)
-        assertNotNull(loadJson?.startsWith("["))
-        assertNotNull(loadJson?.endsWith("]"))
+        assertTrue(isJSONArrayValid(loadJson))
     }
 
     @Test

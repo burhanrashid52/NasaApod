@@ -1,10 +1,58 @@
 package ja.burhanrashid52.nasa.apod
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import ja.burhanrashid52.nasa.apod.models.GalaxyDetailItem
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 
+fun <T> LiveData<T>.getOrAwaitValue(
+    time: Long = 2,
+    timeUnit: TimeUnit = TimeUnit.SECONDS
+): T {
+    var data: T? = null
+    val latch = CountDownLatch(1)
+    val observer = object : androidx.lifecycle.Observer<T> {
+        override fun onChanged(o: T?) {
+            data = o
+            latch.countDown()
+            this@getOrAwaitValue.removeObserver(this)
+        }
+    }
+
+    this.observeForever(observer)
+
+    // Don't wait indefinitely if the LiveData is not set.
+    if (!latch.await(time, timeUnit)) {
+        throw TimeoutException("LiveData value was never set.")
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    return data as T
+}
+
+
+@Throws(InterruptedException::class)
+fun <T> getValueForLiveData(liveData: LiveData<T>): T {
+    val data = arrayOfNulls<Any>(1)
+    val latch = CountDownLatch(1)
+    val observer = object : Observer<T> {
+        override fun onChanged(o: T?) {
+            data[0] = o
+            latch.countDown()
+            liveData.removeObserver(this)
+        }
+    }
+    liveData.observeForever(observer)
+    latch.await(2, TimeUnit.SECONDS)
+
+    @Suppress("UNCHECKED_CAST")
+    return data[0] as T
+}
 
 fun isJSONValid(test: String?): Boolean {
     if (test == null) return false
@@ -12,11 +60,16 @@ fun isJSONValid(test: String?): Boolean {
         JSONObject(test)
     } catch (ex: JSONException) {
         // e.g. in case JSONArray is valid as well...
-        try {
-            JSONArray(test)
-        } catch (ex1: JSONException) {
-            return false
-        }
+        isJSONArrayValid(test)
+    }
+    return true
+}
+
+fun isJSONArrayValid(test: String?): Boolean {
+    try {
+        JSONArray(test)
+    } catch (ex1: JSONException) {
+        return false
     }
     return true
 }
