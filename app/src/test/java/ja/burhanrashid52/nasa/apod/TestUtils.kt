@@ -1,5 +1,6 @@
 package ja.burhanrashid52.nasa.apod
 
+import ja.burhanrashid52.nasa.apod.models.GalaxyDetailItem
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -51,3 +52,15 @@ const val testJson = "[" +
         "        \"url\": \"https://apod.nasa.gov/apod/image/1912/M33-HaLRGB-RayLiao1024.jpg\"\n" +
         "    }" +
         "]"
+
+
+val testGalaxyItem = GalaxyDetailItem(
+    copyright = "CR",
+    date = "12/2/2020",
+    explanation = "Explantion",
+    hdurl = "https://example.com/hd_image.jpg",
+    media_type = "image",
+    service_version = "1.1",
+    title = "Hello World",
+    url = "https://example.com/normal_image.jpg"
+)
