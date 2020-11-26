@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Nasa Apod</string>
+    <string name="msg_failed_load">Failed to load data</string>
 </resources>

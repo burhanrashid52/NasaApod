@@ -68,6 +68,8 @@ dependencies {
     androidTestImplementation deps.koin.test
     testImplementation deps.koin.test
 
+    implementation deps.gson
+
     // Android Testing Support Library's runner and rules
     androidTestImplementation deps.atsl.ext_junit
     androidTestImplementation deps.espresso.core
@@ -77,6 +79,7 @@ dependencies {
     androidTestImplementation deps.arch_core.testing
 
     testImplementation deps.junit
-    testImplementation 'org.robolectric:robolectric:4.4'
+    testImplementation deps.robolectric
     debugImplementation deps.fragment.testing
+    testImplementation deps.mockito.kotlin
 }

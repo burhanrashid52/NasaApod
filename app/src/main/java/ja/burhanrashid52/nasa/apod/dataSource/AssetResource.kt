@@ -1,11 +1,12 @@
 package ja.burhanrashid52.nasa.apod.dataSource
 
 import android.content.Context
+import androidx.annotation.StringRes
 import java.io.IOException
 import java.io.InputStream
 
-class AssetResource(private val context: Context) {
-    fun loadJson(fileName: String): String? {
+open class AssetResource(private val context: Context) {
+    open fun loadJson(fileName: String): String? {
         return try {
             val inputStream: InputStream = context.assets.open(fileName)
             val size: Int = inputStream.available()
@@ -18,4 +19,6 @@ class AssetResource(private val context: Context) {
             return null
         }
     }
+
+    open fun getString(@StringRes id: Int): String = context.getString(id)
 }
