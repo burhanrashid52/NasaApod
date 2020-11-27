@@ -5,6 +5,7 @@ import com.nhaarman.mockitokotlin2.mock
 import ja.burhanrashid52.nasa.apod.dataSource.ApodRepository
 import ja.burhanrashid52.nasa.apod.dataSource.Resource
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import ja.burhanrashid52.nasa.apod.home.HomeViewModel
 import junit.framework.TestCase.assertTrue
 import org.junit.Assert.assertEquals
 import org.junit.Rule

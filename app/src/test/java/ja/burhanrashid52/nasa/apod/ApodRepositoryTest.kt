@@ -4,6 +4,7 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import ja.burhanrashid52.nasa.apod.dataSource.AssetResource
+import ja.burhanrashid52.nasa.apod.dataSource.AssetResourceImpl
 import ja.burhanrashid52.nasa.apod.dataSource.Resource
 import ja.burhanrashid52.nasa.apod.dataSource.createApodRepository
 import org.junit.Assert.assertEquals

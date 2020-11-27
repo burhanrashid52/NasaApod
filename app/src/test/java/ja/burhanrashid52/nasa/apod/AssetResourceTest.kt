@@ -2,8 +2,7 @@ package ja.burhanrashid52.nasa.apod
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.platform.app.InstrumentationRegistry
-import ja.burhanrashid52.nasa.apod.dataSource.AssetResource
+import ja.burhanrashid52.nasa.apod.dataSource.AssetResourceImpl
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -24,12 +23,12 @@ class AssetResourceTest {
 
 
     private lateinit var ctx: Context
-    private lateinit var assetResource: AssetResource
+    private lateinit var assetResource: AssetResourceImpl
 
     @Before
     fun setup() {
         ctx = ApplicationProvider.getApplicationContext()
-        assetResource = AssetResource(ctx)
+        assetResource = AssetResourceImpl(ctx)
     }
 
 

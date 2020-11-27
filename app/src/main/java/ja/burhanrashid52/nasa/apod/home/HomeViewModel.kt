@@ -1,4 +1,4 @@
-package ja.burhanrashid52.nasa.apod
+package ja.burhanrashid52.nasa.apod.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

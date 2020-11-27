@@ -5,8 +5,17 @@ import androidx.annotation.StringRes
 import java.io.IOException
 import java.io.InputStream
 
-open class AssetResource(private val context: Context) {
-    open fun loadJson(fileName: String): String? {
+
+interface AssetResource {
+    fun loadJson(fileName: String): String?
+
+    fun getString(@StringRes id: Int): String
+}
+
+fun createAssetResource(context: Context): AssetResource = AssetResourceImpl(context)
+
+class AssetResourceImpl(private val context: Context) : AssetResource {
+    override fun loadJson(fileName: String): String? {
         return try {
             val inputStream: InputStream = context.assets.open(fileName)
             val size: Int = inputStream.available()
@@ -20,5 +29,5 @@ open class AssetResource(private val context: Context) {
         }
     }
 
-    open fun getString(@StringRes id: Int): String = context.getString(id)
+    override fun getString(@StringRes id: Int): String = context.getString(id)
 }

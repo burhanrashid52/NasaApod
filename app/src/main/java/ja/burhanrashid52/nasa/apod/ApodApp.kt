@@ -1,10 +1,10 @@
 package ja.burhanrashid52.nasa.apod
 
 import android.app.Application
-import ja.burhanrashid52.nasa.apod.dataSource.AssetResource
-import ja.burhanrashid52.nasa.apod.dataSource.createApodRepository
+import ja.burhanrashid52.nasa.apod.dataSource.*
+import ja.burhanrashid52.nasa.apod.home.HomeViewModel
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import timber.log.Timber
@@ -18,18 +18,25 @@ class ApodApp : Application() {
         startKoin {
             // androidLogger()
             androidContext(this@ApodApp)
-            modules(appModule)
+            modules(appModule, appViewModel)
         }
     }
 }
 
 val appModule = module {
 
-    single {
-        AssetResource(androidContext())
+    single<AssetResource> {
+        createAssetResource(androidContext())
     }
 
-    single {
+    single<ApodRepository> {
         createApodRepository(get())
+    }
+}
+
+val appViewModel = module {
+
+    viewModel {
+        HomeViewModel(get())
     }
 }

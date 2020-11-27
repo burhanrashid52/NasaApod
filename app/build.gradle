@@ -70,9 +70,12 @@ dependencies {
 
     implementation deps.gson
 
+    implementation deps.glide.runtime
+
     // Android Testing Support Library's runner and rules
     androidTestImplementation deps.atsl.ext_junit
     androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.espresso.contrib
     androidTestImplementation deps.atsl.runner
     androidTestImplementation deps.atsl.rules
     androidTestImplementation deps.atsl.core
