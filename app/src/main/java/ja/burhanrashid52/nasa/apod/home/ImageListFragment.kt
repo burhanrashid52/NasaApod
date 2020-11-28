@@ -13,7 +13,9 @@ class ImageListFragment : Fragment(R.layout.fragment_image_list) {
 
     private lateinit var bindings: FragmentImageListBinding
     private val homeViewModel: HomeViewModel by activityViewModels()
-    private val imagesAdapter = ImagesAdapter()
+    private val imagesAdapter = ImagesAdapter {
+        homeViewModel.setItemSelectedPosition(it)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,5 +37,7 @@ class ImageListFragment : Fragment(R.layout.fragment_image_list) {
                 }
             }
         })
+
+        homeViewModel
     }
 }

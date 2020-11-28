@@ -1,31 +1,31 @@
-package ja.burhanrashid52.nasa.apod.home
+package ja.burhanrashid52.nasa.apod.home.details
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ja.burhanrashid52.nasa.apod.R
-import ja.burhanrashid52.nasa.apod.databinding.RowImageBinding
+import ja.burhanrashid52.nasa.apod.databinding.RowDetailsBinding
 import ja.burhanrashid52.nasa.apod.models.GalaxyUI
 
-class ImagesAdapter(val onClick: (Int) -> Unit) :
-    ListAdapter<GalaxyUI, ImagesAdapter.ImagesViewHolder>(galaxyItemDiffCallback) {
+class ImageDetailsAdapter :
+    ListAdapter<GalaxyUI, ImageDetailsAdapter.ImageDetailsViewHolder>(galaxyItemDiffCallback) {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagesViewHolder {
-        val rowImageBinding =
-            RowImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ImagesViewHolder(rowImageBinding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageDetailsViewHolder {
+        val rowDetailsBinding =
+            RowDetailsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ImageDetailsViewHolder(rowDetailsBinding)
     }
 
-    override fun onBindViewHolder(holder: ImagesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImageDetailsViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    inner class ImagesViewHolder(private val binding: RowImageBinding) :
+    inner class ImageDetailsViewHolder(private val binding: RowDetailsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(galaxyUI: GalaxyUI) {
             binding.txtTitle.text = galaxyUI.title
@@ -39,10 +39,6 @@ class ImagesAdapter(val onClick: (Int) -> Unit) :
                 })*/
                 //.error(R.drawable.ic_launcher_background)
                 .into(binding.imgGalaxy)
-
-            itemView.setOnClickListener {
-                onClick.invoke(layoutPosition)
-            }
         }
 
     }

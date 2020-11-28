@@ -24,4 +24,13 @@ class HomeViewModel(private val apodRepository: ApodRepository) : ViewModel() {
             is Resource.Failure -> Resource.Failure(fetchImages.throwable)
         }
     }
+
+    private val _selectedItemPosition = MutableLiveData<Int>()
+
+    val selectedItemPosition: LiveData<Int>
+        get() = _selectedItemPosition
+
+    fun setItemSelectedPosition(position: Int) {
+        _selectedItemPosition.value = position
+    }
 }

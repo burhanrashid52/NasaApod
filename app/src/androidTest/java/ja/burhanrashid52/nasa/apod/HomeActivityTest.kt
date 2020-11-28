@@ -1,6 +1,9 @@
 package ja.burhanrashid52.nasa.apod
 
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -10,6 +13,8 @@ import androidx.test.rule.ActivityTestRule
 import ja.burhanrashid52.nasa.apod.dataSource.AssetResource
 import ja.burhanrashid52.nasa.apod.home.HomeActivity
 import ja.burhanrashid52.nasa.apod.home.ImagesAdapter
+import ja.burhanrashid52.nasa.apod.home.details.ImageDetailsAdapter
+import ja.burhanrashid52.nasa.apod.home.details.ImageDetailsFragment
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -45,7 +50,7 @@ class HomeActivityTest {
     }
 
     @Test
-    fun when_app_is_launched_show_the_list_of_images() {
+    fun scroll_to_the_list_of_images_and_open_image_details_on_item_click() {
         activityTestRule.launchActivity(null)
         onView(withId(R.id.rvImages)).perform(
             RecyclerViewActions.actionOnItem<ImagesAdapter.ImagesViewHolder>(
@@ -53,9 +58,16 @@ class HomeActivityTest {
                 scrollTo()
             )
         )
+
+        onView(withId(R.id.rvImages)).perform(
+            RecyclerViewActions.actionOnItem<ImagesAdapter.ImagesViewHolder>(
+                hasDescendant(withContentDescription("Geminid Meteors over Chile")),
+                click()
+            )
+        )
+
         onView(withContentDescription("Geminid Meteors over Chile")).check(matches(isDisplayed()))
         onView(withText("Geminid Meteors over Chile")).check(matches(isDisplayed()))
-
     }
 
     @After
