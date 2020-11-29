@@ -1,15 +1,15 @@
 package ja.burhanrashid52.nasa.apod.home
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import ja.burhanrashid52.nasa.apod.R
 import ja.burhanrashid52.nasa.apod.databinding.RowImageBinding
 import ja.burhanrashid52.nasa.apod.models.GalaxyUI
+import ja.burhanrashid52.nasa.apod.utils.galaxyItemDiffCallback
 
 
 class ImagesAdapter(val onClick: (Int) -> Unit) :
@@ -39,7 +39,7 @@ class ImagesAdapter(val onClick: (Int) -> Unit) :
                     centerRadius = 30f
                     start()
                 })
-                //.error(R.drawable.ic_launcher_background)
+                //.error(R.drawable.ic_baseline_broken_image_24)
                 .into(binding.imgGalaxy)
 
             itemView.setOnClickListener {
@@ -49,16 +49,3 @@ class ImagesAdapter(val onClick: (Int) -> Unit) :
 
     }
 }
-
-class ItemDiffCallback<T> : DiffUtil.ItemCallback<T>() {
-    override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
-        return oldItem == newItem
-    }
-
-    @SuppressLint("DiffUtilEquals")  // equals() is OK for data classes
-    override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
-        return oldItem == newItem
-    }
-}
-
-val galaxyItemDiffCallback = ItemDiffCallback<GalaxyUI>()
