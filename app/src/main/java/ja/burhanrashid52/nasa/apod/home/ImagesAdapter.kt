@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
-import ja.burhanrashid52.nasa.apod.R
 import ja.burhanrashid52.nasa.apod.databinding.RowImageBinding
 import ja.burhanrashid52.nasa.apod.models.GalaxyUI
+
 
 class ImagesAdapter(val onClick: (Int) -> Unit) :
     ListAdapter<GalaxyUI, ImagesAdapter.ImagesViewHolder>(galaxyItemDiffCallback) {
@@ -30,13 +31,14 @@ class ImagesAdapter(val onClick: (Int) -> Unit) :
         fun bind(galaxyUI: GalaxyUI) {
             binding.txtTitle.text = galaxyUI.title
             binding.imgGalaxy.contentDescription = galaxyUI.title
-            Glide.with(binding.imgGalaxy.context)
+            val context = binding.imgGalaxy.context
+            Glide.with(context)
                 .load(galaxyUI.imageUrl).fitCenter().centerCrop()
-                /*.placeholder(CircularProgressDrawable(view.context).apply {
+                .placeholder(CircularProgressDrawable(context).apply {
                     strokeWidth = 5f
                     centerRadius = 30f
                     start()
-                })*/
+                })
                 //.error(R.drawable.ic_launcher_background)
                 .into(binding.imgGalaxy)
 

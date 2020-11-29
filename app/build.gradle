@@ -1,7 +1,6 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion build_versions.compile_sdk
@@ -69,6 +68,10 @@ dependencies {
     testImplementation deps.koin.test
 
     implementation deps.gson
+    implementation deps.swipeToRefresh
+
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui_ktx
 
     implementation deps.glide.runtime
 

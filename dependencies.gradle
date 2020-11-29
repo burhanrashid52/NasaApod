@@ -34,7 +34,7 @@ versions.mockito_all = "1.10.19"
 versions.mockito_android = "2.25.0"
 versions.mockito_kotlin = "2.2.0"
 versions.mockwebserver = "3.8.1"
-versions.navigation = "2.3.0-alpha01"
+versions.navigation = "2.3.1"
 versions.okhttp_logging_interceptor = "3.9.0"
 versions.paging = "2.1.1"
 versions.recyclerview = "1.0.0"
@@ -54,6 +54,7 @@ versions.koin_android = "2.1.6"
 versions.koin_test = "2.1.6"
 versions.view_pager = "1.0.0"
 versions.gson = "2.8.6"
+versions.swipeToRefresh = "1.1.0"
 ext.versions = versions
 
 def build_versions = [:]
@@ -80,6 +81,9 @@ deps.google_services_plugin = "com.google.gms:google-services:$versions.google_s
 deps.android_things = "com.google.android.things:androidthings:$versions.android_things"
 
 deps.gson = "com.google.code.gson:gson:$versions.gson"
+
+deps.swipeToRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:$versions.swipeToRefresh"
+
 
 def arch_core = [:]
 arch_core.runtime = "androidx.arch.core:core-runtime:$versions.arch_core"

@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -20,19 +21,13 @@ class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val imageDetailsAdapter = ImageDetailsAdapter()
 
-    companion object {
-        fun newInstance(position: Int) = ImageDetailsFragment().apply {
-            arguments = bundleOf(
-                "position" to position
-            )
-        }
-    }
+    private val args: ImageDetailsFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindings = FragmentImageDetailsBinding.bind(view)
         val rvImageDetails = bindings.rvImageDetails
-        val selectedItemPosition = arguments?.getInt("position") ?: 0
+        val selectedItemPosition = args.selectedPosition
 
         val layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         rvImageDetails.layoutManager = layoutManager
