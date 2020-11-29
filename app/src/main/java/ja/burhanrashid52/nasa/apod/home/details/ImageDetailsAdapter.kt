@@ -32,7 +32,7 @@ class ImageDetailsAdapter :
             binding.imgGalaxy.contentDescription = galaxyUI.title
             val context = binding.imgGalaxy.context
             Glide.with(context)
-                .load(galaxyUI.imageUrl).fitCenter().centerCrop()
+                .load(galaxyUI.hdImageUrl).fitCenter().centerCrop()
                 .placeholder(CircularProgressDrawable(context).apply {
                     strokeWidth = 5f
                     centerRadius = 30f

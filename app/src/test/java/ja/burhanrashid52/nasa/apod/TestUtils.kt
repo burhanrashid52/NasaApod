@@ -109,7 +109,7 @@ const val testJson = "[" +
 
 val testGalaxyItem = GalaxyDetailItem(
     copyright = "CR",
-    date = "12/2/2020",
+    date = "2020-02-12",
     explanation = "Explantion",
     hdurl = "https://example.com/hd_image.jpg",
     media_type = "image",
