@@ -14,9 +14,11 @@ import ja.burhanrashid52.nasa.apod.R
 import ja.burhanrashid52.nasa.apod.dataSource.Resource
 import ja.burhanrashid52.nasa.apod.databinding.FragmentImageDetailsBinding
 import ja.burhanrashid52.nasa.apod.home.HomeViewModel
+import timber.log.Timber
 
 class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
 
+    private lateinit var layoutManager: LinearLayoutManager
     private lateinit var bindings: FragmentImageDetailsBinding
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val imageDetailsAdapter = ImageDetailsAdapter()
@@ -25,11 +27,12 @@ class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Timber.e(this.toString())
         bindings = FragmentImageDetailsBinding.bind(view)
         val rvImageDetails = bindings.rvImageDetails
-        val selectedItemPosition = args.selectedPosition
+        val selectedItemPosition = savedInstanceState?.getInt("position") ?: args.selectedPosition
 
-        val layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         rvImageDetails.layoutManager = layoutManager
         // Snap each linear item into the center when scrolling.
         LinearSnapHelper().apply { attachToRecyclerView(rvImageDetails) }
@@ -50,5 +53,10 @@ class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
                 }
             }
         })
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("position", layoutManager.findFirstVisibleItemPosition())
     }
 }
