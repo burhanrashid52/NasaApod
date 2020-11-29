@@ -2,7 +2,6 @@ package ja.burhanrashid52.nasa.apod.home.details
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -25,15 +24,26 @@ class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
 
     private val args: ImageDetailsFragmentArgs by navArgs()
 
+    companion object {
+        private const val SCROLLED_POSITION = "position"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.e(this.toString())
         bindings = FragmentImageDetailsBinding.bind(view)
         val rvImageDetails = bindings.rvImageDetails
-        val selectedItemPosition = savedInstanceState?.getInt("position") ?: args.selectedPosition
+
+        /*
+        * Using save instance bundle to retain the position on config change. The same problem can be solved
+        * by view model, but creating a view model just for one state is too much and unnecessary.
+        * */
+        val selectedItemPosition =
+            savedInstanceState?.getInt(SCROLLED_POSITION) ?: args.selectedPosition
 
         layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         rvImageDetails.layoutManager = layoutManager
+
         // Snap each linear item into the center when scrolling.
         LinearSnapHelper().apply { attachToRecyclerView(rvImageDetails) }
         rvImageDetails.adapter = imageDetailsAdapter
@@ -57,6 +67,6 @@ class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt("position", layoutManager.findFirstVisibleItemPosition())
+        outState.putInt(SCROLLED_POSITION, layoutManager.findFirstVisibleItemPosition())
     }
 }

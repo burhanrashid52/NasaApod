@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import ja.burhanrashid52.nasa.apod.R
 import ja.burhanrashid52.nasa.apod.dataSource.Resource
 import ja.burhanrashid52.nasa.apod.databinding.FragmentImageListBinding
