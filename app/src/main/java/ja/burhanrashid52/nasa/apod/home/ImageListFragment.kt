@@ -5,9 +5,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import ja.burhanrashid52.nasa.apod.R
 import ja.burhanrashid52.nasa.apod.dataSource.Resource
 import ja.burhanrashid52.nasa.apod.databinding.FragmentImageListBinding
+import ja.burhanrashid52.nasa.apod.utils.isPortrait
+import timber.log.Timber
 
 class ImageListFragment : Fragment(R.layout.fragment_image_list) {
 
@@ -19,9 +23,14 @@ class ImageListFragment : Fragment(R.layout.fragment_image_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Timber.e(this.toString())
         bindings = FragmentImageListBinding.bind(view)
 
+        val spanCount = if (requireContext().isPortrait()) 3 else 4
+        val layoutManager = GridLayoutManager(context, spanCount)
+        bindings.rvImages.layoutManager = layoutManager
         bindings.rvImages.adapter = imagesAdapter
+
 
         homeViewModel.galaxyUI.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -37,7 +46,5 @@ class ImageListFragment : Fragment(R.layout.fragment_image_list) {
                 }
             }
         })
-
-        homeViewModel
     }
 }
