@@ -13,4 +13,21 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+    <style name="ThemeOverlay.ImageTile" parent="Theme.NasaApod">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.Image.Tile.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.Image.Tile.Headline6</item>
+    </style>
+
+    <style name="TextAppearance.Image.Tile.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">8sp</item>
+    </style>
+
+
+    <style name="TextAppearance.Image.Tile.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">10sp</item>
+    </style>
+
 </resources>

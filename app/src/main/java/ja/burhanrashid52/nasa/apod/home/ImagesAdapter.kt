@@ -31,6 +31,7 @@ class ImagesAdapter(val onClick: (Int) -> Unit) :
         fun bind(galaxyUI: GalaxyUI) {
             binding.txtTitle.text = galaxyUI.title
             binding.imgGalaxy.contentDescription = galaxyUI.title
+            binding.txtCreatedOn.text = galaxyUI.createdOn
             val context = binding.imgGalaxy.context
             Glide.with(context)
                 .load(galaxyUI.imageUrl).fitCenter().centerCrop()

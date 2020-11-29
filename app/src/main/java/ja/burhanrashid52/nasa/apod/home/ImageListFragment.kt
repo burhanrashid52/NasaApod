@@ -25,7 +25,7 @@ class ImageListFragment : Fragment(R.layout.fragment_image_list) {
         Timber.e(this.toString())
         bindings = FragmentImageListBinding.bind(view)
 
-        val spanCount = if (requireContext().isPortrait()) 3 else 4
+        val spanCount = if (requireContext().isPortrait()) 2 else 4
         val layoutManager = GridLayoutManager(context, spanCount)
         bindings.rvImages.layoutManager = layoutManager
         bindings.rvImages.adapter = imagesAdapter
