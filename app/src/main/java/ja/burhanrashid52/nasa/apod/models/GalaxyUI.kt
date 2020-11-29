@@ -21,6 +21,6 @@ fun GalaxyDetailItem.toGalaxyUI(): GalaxyUI {
         imageUrl = url,
         hdImageUrl = hdurl,
         createdOn = date.formatDate("yyyy-MM-dd", "MMMM dd, yyyy"),
-        copyrightBy = copyright.let { "\u00A9 $it" }
+        copyrightBy = copyright?.let { "\u00A9 $it" } ?: ""
     )
 }

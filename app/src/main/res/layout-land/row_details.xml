@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/ThemeOverlay.ImageDetails">
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -24,14 +25,80 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.6" />
 
+
+    <View
+        android:id="@+id/bgGradient"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/gradient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtTitle"
+        app:layout_constraintTop_toTopOf="@+id/txtTitle" />
+
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="@dimen/normal_margin"
         android:textAppearance="?textAppearanceHeadline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/txtInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        android:tint="?android:textColorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtTitle"
+        app:srcCompat="@drawable/ic_baseline_info_24" />
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/small_margin"
+        android:lineSpacingExtra="8dp"
+        android:lineSpacingMultiplier="1.25"
+        android:padding="4dp"
+        android:scrollbars="vertical"
+        android:textAppearance="?textAppearanceHeadline5"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/txtCreatedOn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle"
+        tools:maxLines="5"
+        tools:text="@tools:sample/lorem/random" />
+
+
+    <TextView
+        android:id="@+id/txtCopyright"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/normal_margin"
+        android:textAppearance="?textAppearanceHeadline6"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@tools:sample/first_names" />
+
+    <TextView
+        android:id="@+id/txtCreatedOn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/normal_margin"
+        android:textAppearance="?textAppearanceHeadline6"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txtCopyright"
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        tools:text="@tools:sample/date/mmddyy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

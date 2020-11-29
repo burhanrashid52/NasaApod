@@ -1,5 +1,6 @@
 package ja.burhanrashid52.nasa.apod.home.details
 
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -29,6 +30,10 @@ class ImageDetailsAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(galaxyUI: GalaxyUI) {
             binding.txtTitle.text = galaxyUI.title
+            binding.txtDescription?.text = galaxyUI.description
+            binding.txtDescription?.movementMethod = ScrollingMovementMethod()
+            binding.txtCopyright?.text = galaxyUI.copyrightBy
+            binding.txtCreatedOn?.text = galaxyUI.createdOn
             binding.imgGalaxy.contentDescription = galaxyUI.title
             val context = binding.imgGalaxy.context
             Glide.with(context)

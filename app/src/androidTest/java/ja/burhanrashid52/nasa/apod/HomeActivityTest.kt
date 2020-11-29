@@ -41,11 +41,6 @@ class HomeActivityTest {
     }
 
     @Test
-    fun launches() {
-        activityTestRule.launchActivity(null)
-    }
-
-    @Test
     fun scroll_to_the_list_of_images_and_open_image_details_on_item_click() {
         activityTestRule.launchActivity(null)
         onView(withId(R.id.rvImages)).perform(
