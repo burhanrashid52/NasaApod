@@ -8,16 +8,14 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import ja.burhanrashid52.nasa.apod.dataSource.AssetResource
+import ja.burhanrashid52.nasa.apod.dataSource.ApodRepository
+import ja.burhanrashid52.nasa.apod.dataSource.createApodRepository
 import ja.burhanrashid52.nasa.apod.home.HomeActivity
 import ja.burhanrashid52.nasa.apod.home.ImagesAdapter
-import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.loadKoinModules
-import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 
 /**
@@ -31,17 +29,14 @@ class HomeActivityTest {
     @get:Rule
     val activityTestRule = ActivityTestRule(HomeActivity::class.java, false, false)
 
-    @Before
-    fun setup() {
-        loadKoinModules(module {
-            single<AssetResource>(override = true) {
-                FakeAssetResource("sample_data.json")
-            }
-        })
+    @Test
+    fun launches() {
+        activityTestRule.launchActivity(null)
     }
 
     @Test
     fun scroll_to_the_list_of_images_and_open_image_details_on_item_click() {
+        loadFakeJson("sample_data.json")
         activityTestRule.launchActivity(null)
         onView(withId(R.id.rvImages)).perform(
             RecyclerViewActions.actionOnItem<ImagesAdapter.ImagesViewHolder>(
@@ -61,9 +56,18 @@ class HomeActivityTest {
         onView(withText("Geminid Meteors over Chile")).check(matches(isDisplayed()))
     }
 
-    @After
-    fun tearDown() {
-        stopKoin()
+    @Test
+    fun show_error_message_when_app_fail_to_load_data() {
+        loadFakeJson("invalid_data.json")
+        activityTestRule.launchActivity(null)
+        onView(withText("Failed to load")).check(matches(isDisplayed()))
     }
 
+    private fun loadFakeJson(fileName: String) {
+        loadKoinModules(module {
+            single<ApodRepository>(override = true) {
+                createApodRepository(FakeAssetResource(fileName))
+            }
+        })
+    }
 }

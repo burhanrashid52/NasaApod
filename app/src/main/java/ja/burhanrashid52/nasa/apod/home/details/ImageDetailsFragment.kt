@@ -2,6 +2,8 @@ package ja.burhanrashid52.nasa.apod.home.details
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -49,9 +51,12 @@ class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
         rvImageDetails.adapter = imageDetailsAdapter
 
         homeViewModel.galaxyUI.observe(viewLifecycleOwner, Observer {
+            bindings.rvImageDetails.isVisible = it is Resource.Success
+            bindings.txtEmptyView.isGone = it is Resource.Success
+
             when (it) {
                 is Resource.Loading -> {
-                    //TODO
+                    bindings.txtEmptyView.text = getString(R.string.label_loading)
                 }
                 is Resource.Success -> {
                     imageDetailsAdapter.submitList(it.data)
@@ -59,7 +64,7 @@ class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
                 }
 
                 is Resource.Failure -> {
-                    //TODO
+                    bindings.txtEmptyView.text = it.throwable.message
                 }
             }
         })

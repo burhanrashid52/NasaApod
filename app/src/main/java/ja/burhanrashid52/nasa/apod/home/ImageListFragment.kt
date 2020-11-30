@@ -2,6 +2,8 @@ package ja.burhanrashid52.nasa.apod.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -32,16 +34,19 @@ class ImageListFragment : Fragment(R.layout.fragment_image_list) {
 
 
         homeViewModel.galaxyUI.observe(viewLifecycleOwner, Observer {
+            bindings.rvImages.isVisible = it is Resource.Success
+            bindings.txtEmptyView.isGone = it is Resource.Success
+
             when (it) {
                 is Resource.Loading -> {
-                    //TODO
+                    bindings.txtEmptyView.text = getString(R.string.label_loading)
                 }
                 is Resource.Success -> {
                     imagesAdapter.submitList(it.data)
                 }
 
                 is Resource.Failure -> {
-                    //TODO
+                    bindings.txtEmptyView.text = it.throwable.message
                 }
             }
         })

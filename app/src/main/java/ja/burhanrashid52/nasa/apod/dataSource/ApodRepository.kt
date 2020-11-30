@@ -20,7 +20,7 @@ private class ApodRepositoryImpl(private val assetResource: AssetResource) : Apo
                     )
                 Resource.Success(galaxyList)
             } catch (e: Exception) {
-                Resource.Failure(e)
+                Resource.Failure(Exception(assetResource.getString(R.string.msg_failed_load)))
             }
         }
     }
